@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Speech Reader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #text-output {
+            margin-top: 20px;
+            max-width: 600px;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>📄 PDF to Speech Reader</h1>
+    <input type="file" id="pdf-upload" accept="application/pdf">
+    <button id="read-btn">Read Aloud</button>
+    <button id="stop-btn">Stop</button>
+
+    <div id="text-output">Upload a PDF to extract text.</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
