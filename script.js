@@ -3,6 +3,23 @@ document.getElementById("read-btn").addEventListener("click", readAloud);
 document.getElementById("stop-btn").addEventListener("click", stopSpeech);
 
 let extractedText = "";
+let selectedVoice = null;
+
+function loadVoices() {
+    const voices = speechSynthesis.getVoices();
+    const voiceSelect = document.getElementById("voice-select");
+    
+    voices.forEach((voice, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        voiceSelect.appendChild(option);
+    });
+
+    selectedVoice = voices[0]; // Default to the first available voice
+}
+
+speechSynthesis.onvoiceschanged = loadVoices;
 
 function handleFileUpload(event) {
     const file = event.target.files[0];
@@ -38,6 +55,17 @@ function readAloud() {
     }
 
     const utterance = new SpeechSynthesisUtterance(extractedText);
+    
+    // Apply voice settings
+    const voices = speechSynthesis.getVoices();
+    const selectedIndex = document.getElementById("voice-select").value;
+    if (voices[selectedIndex]) {
+        utterance.voice = voices[selectedIndex];
+    }
+    
+    utterance.pitch = parseFloat(document.getElementById("pitch").value);
+    utterance.rate = parseFloat(document.getElementById("rate").value);
+    
     speechSynthesis.speak(utterance);
 }
 
