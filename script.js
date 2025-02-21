@@ -54,9 +54,12 @@ function readAloud() {
         return;
     }
 
+    // Stop ongoing speech before starting a new one
+    speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(extractedText);
     
-    // Apply voice settings
+    // Apply selected voice, pitch, and speed
     const voices = speechSynthesis.getVoices();
     const selectedIndex = document.getElementById("voice-select").value;
     if (voices[selectedIndex]) {
@@ -65,9 +68,11 @@ function readAloud() {
     
     utterance.pitch = parseFloat(document.getElementById("pitch").value);
     utterance.rate = parseFloat(document.getElementById("rate").value);
-    
+
+    // Start speech
     speechSynthesis.speak(utterance);
 }
+
 
 function stopSpeech() {
     speechSynthesis.cancel();
